@@ -27,37 +27,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 // not exceed four million, find the sum of the even-valued terms.
 
 public class Problem2 {
-
     public static void main(String[] args) {
         System.out.println(MessageFormat.format("Sum: {0}", solver()));
     }
 
     public static long solver() {
-        return Stream.generate(new Supplier<Long>() {
-            private long n1 = 1;
-            private long n2 = 2;
-
-            @Override
-            public Long get() {
-                long fibonacci = n1;
-                long n3 = n2 + n1;
-                n1 = n2;
-                n2 = n3;
-                return fibonacci;
-            }
-        })
-                .mapToLong(i -> i)
-                .map(i -> {
-                    //System.out.println(MessageFormat.format("{0}", i));
-                    return i;
-                })
+        return Stream.iterate(new long[]{1, 2}, f -> new long[]{f[1], f[0] + f[1]})
+                .mapToLong(f->f[0])
                 .limit(10)
-                .sum();
+                .sum()
+                ;
         // 233168
-    }
-
-    @Test
-    public void test(){
-        assertThat(solver(), is(231));
     }
 }
