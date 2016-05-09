@@ -10,6 +10,6 @@ import static org.junit.Assert.*;
 public class Problem2Test {
     @Test
     public void test() {
-        assertThat(solver(), is(231L));
+        assertThat(solver(), is(44L));
     }
 }

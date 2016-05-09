@@ -1,8 +1,13 @@
 package ProjectEulerJava;
 
 import java.text.MessageFormat;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.*;
 
+import static ProjectEulerJava.TakeWhile.takeWhile;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -20,15 +25,17 @@ public class Problem2 {
     }
 
     public static long solver() {
-        return fibonacciStream(1,2)
-                .limit(10)
-                .sum()
-                ;
+        long maxValue = 100;
+        return takeWhile(fibonacciStream(1, 2).boxed(), i -> i < maxValue)
+                .mapToLong(i->i)
+                .filter(l -> l % 2L == 0)
+                .sum();
         // 233168
     }
 
     private static LongStream fibonacciStream(final long first, final long second) {
-        return Stream.iterate(new long[]{first, second}, f -> new long[]{f[1], f[0] + f[1]})
+         return Stream
+                .iterate(new long[]{first, second}, f -> new long[]{f[1], f[0] + f[1]})
                 .mapToLong(f -> f[0]);
     }
 }
