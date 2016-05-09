@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
@@ -20,8 +21,8 @@ import java.util.stream.StreamSupport;
 public class Problem2 {
     private static class Fibonacci implements Iterable<Integer>{
         @Override
-        public Iterator iterator() {
-            return new Iterator(){
+        public Iterator<Integer> iterator() {
+            return new Iterator<Integer>(){
                 private int fst = 0;
                 private int snd = 1;
                 @Override
@@ -30,7 +31,7 @@ public class Problem2 {
                 }
 
                 @Override
-                public Object next() {
+                public Integer next() {
                     int next = fst + snd;
 
                     fst = snd;
@@ -44,14 +45,14 @@ public class Problem2 {
 
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        Spliterator spliterator = Spliterators
+        Spliterator<Integer> spliterator = Spliterators
                 .spliteratorUnknownSize(fibonacci.iterator(), 0);
 
-        List<Integer> list = StreamSupport.stream(spliterator, false)
-                //.mapToInt(i -> (int) i)
-                .collect(Collectors.toList())
-                //.limit(10)
-                //.sum()
+        int sum = StreamSupport
+                .stream(spliterator, false)
+                .mapToInt(i->i)
+                .limit(10)
+                .sum()
                 ;
 
         System.out.println(String.format("Sum: %d", sum));
