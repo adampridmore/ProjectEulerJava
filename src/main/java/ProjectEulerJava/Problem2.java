@@ -1,19 +1,7 @@
 package ProjectEulerJava;
 
-import org.junit.Test;
-
-import javax.swing.text.html.HTMLDocument;
 import java.text.MessageFormat;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import java.util.stream.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -32,11 +20,15 @@ public class Problem2 {
     }
 
     public static long solver() {
-        return Stream.iterate(new long[]{1, 2}, f -> new long[]{f[1], f[0] + f[1]})
-                .mapToLong(f->f[0])
+        return fibonacciStream(1,2)
                 .limit(10)
                 .sum()
                 ;
         // 233168
+    }
+
+    private static LongStream fibonacciStream(final long first, final long second) {
+        return Stream.iterate(new long[]{first, second}, f -> new long[]{f[1], f[0] + f[1]})
+                .mapToLong(f -> f[0]);
     }
 }
