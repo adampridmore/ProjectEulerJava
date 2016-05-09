@@ -1,5 +1,6 @@
 package ProjectEulerJava;
 
+import java.math.BigInteger;
 import java.text.MessageFormat;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -25,17 +26,19 @@ public class Problem2 {
     }
 
     public static long solver() {
-        long maxValue = 100;
-        return takeWhile(fibonacciStream(1, 2).boxed(), i -> i < maxValue)
-                .mapToLong(i->i)
-                .filter(l -> l % 2L == 0)
-                .sum();
-        // 233168
+        long maxValue = 4000000;
+        return
+                takeWhile(fibonacciStream(1L, 2L).boxed(), i -> i < maxValue)
+                        .mapToLong(i -> i)
+                        .filter(l -> l % 2L == 0)
+                        .sum()
+                ;
     }
 
     private static LongStream fibonacciStream(final long first, final long second) {
-         return Stream
+        return Stream
                 .iterate(new long[]{first, second}, f -> new long[]{f[1], f[0] + f[1]})
-                .mapToLong(f -> f[0]);
+                .mapToLong(x -> x[0])
+                ;
     }
 }
