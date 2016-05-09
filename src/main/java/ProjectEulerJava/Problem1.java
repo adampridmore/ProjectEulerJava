@@ -1,5 +1,6 @@
 package ProjectEulerJava;
 
+import java.text.MessageFormat;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -11,14 +12,12 @@ import static java.util.stream.Collectors.toList;
 //Find the sum of all the multiples of 3 or 5 below 1000.
 public class Problem1 {
     public static void main(String[] args) {
-        int sum = solver();
-
-        System.out.println(String.format("Sum: %d", sum));
-        // 233168
+        MessageFormat.format("Sum: {0}", solver());
     }
 
-    private static int solver() {
-        return IntStream.range(1, 1000)
+    public static int solver() {
+        return IntStream
+                .rangeClosed(1, 999)
                 .filter(i -> i % 3 == 0 || i % 5 == 0)
                 .sum()
                 ;
