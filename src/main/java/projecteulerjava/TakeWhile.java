@@ -1,4 +1,4 @@
-package ProjectEulerJava;
+package projecteulerjava;
 
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -17,7 +17,9 @@ public class TakeWhile {
             Spliterator<T> splitr, Predicate<? super T> predicate) {
         return new Spliterators.AbstractSpliterator<T>(splitr.estimateSize(), 0) {
             boolean stillGoing = true;
-            @Override public boolean tryAdvance(Consumer<? super T> consumer) {
+
+            @Override
+            public boolean tryAdvance(Consumer<? super T> consumer) {
                 if (stillGoing) {
                     boolean hadNext = splitr.tryAdvance(elem -> {
                         if (predicate.test(elem)) {
