@@ -8,7 +8,10 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class TakeWhile {
-    static <T> Stream<T> takeWhile(Stream<T> stream, Predicate<? super T> predicate) {
+    private TakeWhile() {
+    }
+
+    public static <T> Stream<T> takeWhile(Stream<T> stream, Predicate<? super T> predicate) {
         return StreamSupport.stream(takeWhile(stream.spliterator(), predicate), false);
     }
 

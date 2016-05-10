@@ -1,10 +1,10 @@
-package projecteulerjava;
+package projecteulerjava.problems;
 
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static projecteulerjava.Problem1.solver;
+import static projecteulerjava.problems.Problem1.solver;
 
 public class Problem1Test {
     @Test

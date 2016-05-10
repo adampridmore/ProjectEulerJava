@@ -1,4 +1,4 @@
-package projecteulerjava;
+package projecteulerjava.problems;
 
 import java.text.MessageFormat;
 import java.util.stream.IntStream;
