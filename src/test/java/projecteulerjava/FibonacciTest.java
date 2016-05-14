@@ -2,6 +2,7 @@ package projecteulerjava;
 
 import org.junit.Test;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
