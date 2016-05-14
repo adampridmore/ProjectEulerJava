@@ -12,9 +12,9 @@ public class PrimesTest {
     @Test
     public void list_of_primes() {
         List<Long> primes = Primes.stream()
-                .limit(5)
+                .limit(10)
                 .collect(Collectors.toList());
 
-        assertThat(primes, contains(2L, 3L, 5L, 7L, 11L));
+        assertThat(primes, contains(2L, 3L, 5L, 7L, 11L, 13L, 17L, 19L, 23L, 29L));
     }
 }

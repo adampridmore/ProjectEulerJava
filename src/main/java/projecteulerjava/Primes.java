@@ -1,9 +1,9 @@
 package projecteulerjava;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class Primes {
@@ -17,16 +17,23 @@ public class Primes {
                 if (lastPrime == null){
                     lastPrime = 2L;
                 } else{
-                    for (long l = lastPrime + 1;true;l++) {
-                        if (isPrime(l)) {
-                            lastPrime = l;
-                            break;
-                        }
-                    }
+                    lastPrime = calculateNextPrime();
                 }
 
                 primes.add(lastPrime);
                 return lastPrime;
+            }
+
+            private Long calculateNextPrime() {
+                if (lastPrime == 2L){
+                    return 3L;
+                }
+
+                return LongStream
+                        .iterate(lastPrime + 2, x -> x + 2)
+                        .filter(this::isPrime)
+                        .findFirst()
+                        .getAsLong();
             }
 
             private boolean isPrime(long l) {
