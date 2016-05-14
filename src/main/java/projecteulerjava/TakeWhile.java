@@ -5,14 +5,15 @@ import java.util.Spliterators;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+
+import static java.util.stream.StreamSupport.stream;
 
 public class TakeWhile {
     private TakeWhile() {
     }
 
     public static <T> Stream<T> takeWhile(Stream<T> stream, Predicate<? super T> predicate) {
-        return StreamSupport.stream(takeWhile(stream.spliterator(), predicate), false);
+        return stream(takeWhile(stream.spliterator(), predicate), false);
     }
 
     // Taken from http://stackoverflow.com/a/20765715/29521
